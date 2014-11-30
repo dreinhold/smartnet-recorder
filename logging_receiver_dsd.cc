@@ -91,7 +91,7 @@ log_dsd::log_dsd(float f, float c, long s, long t, int n)
 	}*/
 	
 	iam_logging = false;
-	dsd = dsd_make_block_ff(dsd_FRAME_P25_PHASE_1,dsd_MOD_C4FM,3,0,0, false, num);
+	dsd = dsd_make_block_ff(dsd_FRAME_P25_PHASE_1,dsd_MOD_C4FM,3, false, 0);
 
 	tm *ltm = localtime(&starttime);
 
@@ -191,8 +191,8 @@ void log_dsd::deactivate() {
 
 	unlock();
 
-  dsd_state *state = dsd->get_state();
-  ofstream myfile (status_filename);
+  //dsd_state *state = dsd->get_state();
+  /*ofstream myfile (status_filename);
   if (myfile.is_open())
   {
     int level = (int) state->max / 164;
@@ -227,7 +227,7 @@ void log_dsd::deactivate() {
     myfile.close();
   }
   else cout << "Unable to open file";
-  dsd->reset_state();
+  dsd->reset_state();*/
 //}
 }
 
