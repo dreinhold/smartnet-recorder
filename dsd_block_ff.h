@@ -24,6 +24,8 @@
 
 #include <dsd/dsd_api.h>
 #include <gnuradio/sync_decimator.h>
+ #include <mbelib.h>
+#include <sndfile.h>
 /*
 extern "C"
 {
