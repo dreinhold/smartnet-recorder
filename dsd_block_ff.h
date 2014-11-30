@@ -30,6 +30,150 @@ extern "C"
   #include <dsd.h>
 }*/
 
+
+
+typedef struct
+{
+  int onesymbol;
+  char mbe_in_file[1024];
+  FILE *mbe_in_f;
+  int errorbars;
+  int datascope;
+  int symboltiming;
+  int verbose;
+  int p25enc;
+  int p25lc;
+  int p25status;
+  int p25tg;
+  int scoperate;
+  char audio_in_dev[1024];
+  int audio_in_fd;
+  SNDFILE *audio_in_file;
+  SF_INFO *audio_in_file_info;
+  int audio_in_type; // 0 for device, 1 for file
+  char audio_out_dev[1024];
+  int audio_out_fd;
+  SNDFILE *audio_out_file;
+  SF_INFO *audio_out_file_info;
+  int audio_out_type; // 0 for device, 1 for file
+  int split;
+  int playoffset;
+  char mbe_out_dir[1024];
+  char mbe_out_file[1024];
+  FILE *mbe_out_f;
+  float audio_gain;
+  int audio_out;
+  char wav_out_file[1024];
+  SNDFILE *wav_out_f;
+  //int wav_out_fd;
+  int serial_baud;
+  char serial_dev[1024];
+  int serial_fd;
+  int resume;
+  int frame_dstar;
+  int frame_x2tdma;
+  int frame_p25p1;
+  int frame_nxdn48;
+  int frame_nxdn96;
+  int frame_dmr;
+  int frame_provoice;
+  int mod_c4fm;
+  int mod_qpsk;
+  int mod_gfsk;
+  int uvquality;
+  int inverted_x2tdma;
+  int inverted_dmr;
+  int mod_threshold;
+  int ssize;
+  int msize;
+  int playfiles;
+  int delay;
+  int use_cosine_filter;
+  int unmute_encrypted_p25;
+} dsd_opts;
+
+typedef struct
+{
+  int *dibit_buf;
+  int *dibit_buf_p;
+  int repeat;
+  short *audio_out_buf;
+  short *audio_out_buf_p;
+  float *audio_out_float_buf;
+  float *audio_out_float_buf_p;
+  float audio_out_temp_buf[160];
+  float *audio_out_temp_buf_p;
+  int audio_out_idx;
+  int audio_out_idx2;
+  //int wav_out_bytes;
+  int center;
+  int jitter;
+  int synctype;
+  int min;
+  int max;
+  int lmid;
+  int umid;
+  int minref;
+  int maxref;
+  int lastsample;
+  int sbuf[128];
+  int sidx;
+  int maxbuf[1024];
+  int minbuf[1024];
+  int midx;
+  char err_str[64];
+  char fsubtype[16];
+  char ftype[16];
+  int symbolcnt;
+  int rf_mod;
+  int numflips;
+  int lastsynctype;
+  int lastp25type;
+  int offset;
+  int carrier;
+  char tg[25][16];
+  int tgcount;
+  int lasttg;
+  int lastsrc;
+  int nac;
+  int errs;
+  int errs2;
+  int mbe_file_type;
+  int optind;
+  int numtdulc;
+  int firstframe;
+  char slot0light[8];
+  char slot1light[8];
+  float aout_gain;
+  float aout_max_buf[200];
+  float *aout_max_buf_p;
+  int aout_max_buf_idx;
+  int samplesPerSymbol;
+  int symbolCenter;
+  char algid[9];
+  char keyid[17];
+  int currentslot;
+  mbe_parms *cur_mp;
+  mbe_parms *prev_mp;
+  mbe_parms *prev_mp_enhanced;
+  int p25kid;
+
+  pthread_mutex_t input_mutex;
+  pthread_cond_t input_ready;
+  const float *input_samples;
+  int input_length;
+  int input_offset;
+
+  pthread_mutex_t output_mutex;
+  pthread_cond_t output_ready;
+  short *output_buffer;
+  int output_offset;
+  float *output_samples;
+  int output_num_samples;
+  int output_length;
+  int output_finished;
+} dsd_state;
+
 enum dsd_frame_mode {
   dsd_FRAME_AUTO_DETECT,
   dsd_FRAME_P25_PHASE_1,
