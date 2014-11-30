@@ -24,11 +24,11 @@
 
 #include <dsd/dsd_api.h>
 #include <gnuradio/sync_decimator.h>
-
+/*
 extern "C"
 {
   #include <dsd.h>
-}
+}*/
 
 enum dsd_frame_mode {
   dsd_FRAME_AUTO_DETECT,
