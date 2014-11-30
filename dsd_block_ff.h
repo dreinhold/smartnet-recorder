@@ -24,14 +24,28 @@
 
 #include <dsd/dsd_api.h>
 #include <gnuradio/sync_decimator.h>
- #include <mbelib.h>
 #include <sndfile.h>
 /*
 extern "C"
 {
   #include <dsd.h>
 }*/
+struct mbe_parameters
+{
+  float w0;
+  int L;
+  int K;
+  int Vl[57];
+  float Ml[57];
+  float log2Ml[57];
+  float PHIl[57];
+  float PSIl[57];
+  float gamma;
+  int un;
+  int repeat;
+};
 
+typedef struct mbe_parameters mbe_parms;
 
 
 typedef struct
